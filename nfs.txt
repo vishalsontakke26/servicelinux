@@ -1,0 +1,54 @@
+nfs server configruation
+server side:-
+
+yum insatll nfs-utils -y
+mkdir /dir_name
+configruation file
+/etc/sysconfig/nfs
+ 
+setfacl -m u:nfsnobody:rwx  /path_name(/dir_name)
+getenfacl dir_name
+
+
+edit file
+vim /etc/exports
+/dir_name(path_name):192.168.0.100/24(rw,sync)
+
+update file
+exportfs -arv
+
+systemctl start nfs-utils
+systemctl enable nfs-utils
+systemctl status nfs-utils
+ 
+firewall-cmd --add-sevice=nfs --permanent
+firewall-cmd --add-sevice=mountd --permanent
+firewall-cmd --add-sevice=rpc-bind --permanent
+firewall-cmd --reload
+
+check in 
+cd /dir_name
+creater a file file{1..10}.txt
+ls
+check you client side
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+client side
+
+showmount -e ipaddress server(example 192.168.0.100)
+vim /etc/fatab
+ipaddress(example 192.168.0.100):/path_name(/dir_name) /mnt nfs  default 0 0 
+:wq
+mount -a
+df -th 
+ls
+cd /mnt
+check in mkdir dir_name2
+ls
+
+check you in server side
