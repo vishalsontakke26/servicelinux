@@ -1,0 +1,118 @@
+ samba server
+ samba configruation 
+ 
+ storge types:- 
+ DAS:- Direct Attach Storge
+ NAS:- Network Attach Storage
+ SAN:- Storage Area Network
+ -----------------------------------------------------------------
+ 
+ samba two server
+ 
+ SMB         NMB
+ 138          137
+ -------------------------------------------------------------------
+ CIFS:-COMMON INTERNEL FS
+ Common Internet File System (CIFS) is a network filesystem protocol used for providing shared access to files and printers between machines on the network. 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+server side 
+nmtui
+
+ip address 192.168.0.100/24
+setp :-
+1) install
+yum install samba -yum
+
+2) configruation file :-
+ /etc/samba/smb.conf
+ 
+ mkdir /cntdir
+ cd cntdir
+ touch file{1..5}
+ cd ..
+ vim /etc/samba/smb.conf
+ 
+[smb_dir]
+path =/cntdir
+coment= centralized directory
+writable =yes
+browseable = yes
+public = yes
+write list mahi
+read list =mahi
+vaild users = mahi 
+:wq
+
+
+useradd mahi
+passwd mahi
+1234
+
+
+smbpasswd -a user1 
+new smbpass 1234
+
+setfacl -m u:user1:rwx  /cntdir/
+getenfore
+setenforce 0
+getenfore
+
+systemctl start smb nmb
+systemctl enable smb nmb  
+
+
+firewall-cmd --list-service=samba
+firewall-cmd --add-service=samba --permanent
+firewall-cmd --reload
+firewall-cmd --list-service=samba
+
+  
+
+yum install samba-client -y
+
+
+
+
+smbclient -U mahi //localhost/smb_dir
+o/p passwd 1234
+smb:\>
+   ls
+   exit
+   ls /cntdir
+  
+  
+-------------------------------------------------------------------------------------
+client side 
+
+check ipaddress 
+nmtui
+ping 8.8.8.8
+ping www.google.com
+ping 192.168.0.100 --server side ipaddress check
+ su 
+ 1234
+ 
+ kill -9 
+ yum install samba-client -y
+ smbclient -U Vishal123 //192.168.0.100/smb_dir
+ 
+  vim /etc/fstab
+  
+ //192.168.0.100/smb_dir  /mnt  cifs   defaults,username=vishal123 0  0 
+ :wq
+ 
+yum list installed | grep cifs-utils
+ yum install cifs-utils -y
+ mount -a
+ df -Th
+ touch /mnt/com{1..5}
+ 
+ 
+ 
+ 
+  
+  
+
+
+
+ 
