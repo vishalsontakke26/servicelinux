@@ -1,0 +1,72 @@
+http 
+
+apache server 
+damed name httpd
+
+package name 
+yum install httpd -y
+
+ifconfig 
+192.168.0.100/24
+
+host entry
+    vim   /etc/hosts
+
+configruation file 
+
+/etc/httpd/
+cd vim 
+
+system start
+systemctl start httpd
+systemctl enable httpd
+
+
+firewall add
+
+firewall-cmd --add-service=http  --permanent
+or
+firewall-cmd --add-port=80/tcp  --permanent
+firewall-cmd --reload
+
+home dir of apacher server  
+cd /var/www/html/
+ 
+ls
+vim index.html
+<h1>hello world </h1>
+:wq
+
+systemctl restart httpd
+
+firefox check
+
+cd www
+mkdir google
+mkdir yahoo
+ cd google
+echo "this is my local google web page" > google.html
+
+ls
+cat google.html 
+
+cd ..
+cd yahoo
+echo "this is my local yahoo web page" > yahoo.html
+ls
+cat yahoo.html
+
+vim /etc/httpd/conf/httpd.conf
+
+<virtualHost  192.168.0.100 :80>
+serverAdmin root@server1.example.com
+DocumentRoot /var/www/google
+DirectoryIndex google.com
+serverAlias google.com
+customLog "logs/google_access_log" combined
+errorLog "logs/google_error_log" 
+</virtualHost>
+
+
+server restart
+systemctl restart httpd 

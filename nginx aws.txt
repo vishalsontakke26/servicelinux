@@ -1,0 +1,24 @@
+nginx aws :-
+linux images os
+packages name 
+
+amazon-linux-extras install nginx1
+
+configruation file 
+
+/etc/nginx/nginx.conf
+
+root  /usr/share/nginx/html/
+
+systemctl start nginx 
+
+systemctl enable nginx 
+
+check nginx 
+ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+
+
+

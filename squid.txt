@@ -1,0 +1,15 @@
+proxy server in aws 
+
+ec2 creater 
+launch instance 
+  ssh 22
+  8080    my ip 
+     ssh remote 
+
+whoami
+
+yum list squid
+sudo yum install squid 
+
+configruation file 
+ etc/squid/squid.conf 
