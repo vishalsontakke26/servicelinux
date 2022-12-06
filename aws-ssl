@@ -1,0 +1,106 @@
+aws ssl certification 
+
+https (Hypertext Transfer Protocol Secure)
+
+port 443
+
+Hypertext Transfer Protocol Secure (https) is a combination of the Hypertext Transfer Protocol (HTTP) 
+with the Secure Socket Layer (SSL)/Transport Layer Security (TLS) protocol. 
+
+setp:
+
+     1 AWS Certificate Manager
+       Request a certificate
+
+  Certificate typeInfo
+   ACM certificates can be used to establish secure communications access across the internet or within an internal network.
+   Choose the type of certificate for acm to provide.
+
+  *   Request a public certificate
+   Request a public SSL/TLS certificate from Amazon. By default, public certificates are trusted by browsers and operating systems.
+
+  * Request a private certificate
+    No private CAs available for issuance.
+
+   Request public certificate
+   
+   Domain names
+ Fully qualified domain nameInfo
+  vishalso.ml (domain_name)
+---------------------------------------
+|Add another name to this certificate |
+|-------------------------------------|
+You can add additional names to this certificate. For example, if you're requesting a certificate for "www.example.com", 
+you might want to add the name "example.com" so that customers can reach your site by either name.
+
+
+ Select validation methodInfo
+
+ Select a method for validating domain ownership
+
+DNS validation - recommended
+Choose this option if you are authorized to modify the DNS configuration for the domains in your certificate request.
+
+Email validation
+Choose this option if you do not have permission or cannot obtain permission to modify the DNS configuration for the domains in your certificate request.
+
+
+TagsInfo
+To help you manage your certificates you can optionally assign your own metadata to each resource in the form of tags.
+
+request
+
+step2 
+  router 53
+ hosts zone 
+ Domain name 
+type of hosts
+ public hostsed zone   in used 
+ private hosted zone 
+ 
+setp3 
+freenom 
+mangement tools
+namesserver enter 
+%user defaults server%
+
+* user customer namesserver(enter below)
+change nameserver
+
+step 4 
+aws certicate mangenent
+creater router 53 record 
+cNames 
+
+step5 
+creater ec2 instance 
+path of user data
+#!/bin/bash
+yum update -y
+yum install httpd -y
+echo "<h1>welcome to home $HOSTNAME</h1>" > var/www/html/index.html
+systemctl start httpd 
+systemctl enable httpd 
+
+security group 
+ssh          port 22 
+http         port 80
+httpd        port 443
+
+
+step4 
+load blancers 
+creater load blancer
+creater Application Load blancer
+listener 
+http 443 
+creater taget group 
+protocol 
+http  80
+
+
+register target 
+target group check in healthy
+
+agian router 53 
+create r a record 
